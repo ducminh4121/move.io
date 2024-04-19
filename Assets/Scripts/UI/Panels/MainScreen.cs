@@ -1,4 +1,4 @@
-﻿#region
+#region
 
 using TMPro;
 using UnityEngine;
@@ -8,9 +8,6 @@ using UnityEngine;
 public class MainScreen : UIPanel
 {
     public static MainScreen Instance { get; private set; }
-
-    [SerializeField]
-    public GameObject btnNoAds;
 
     public override UiPanelType GetId()
     {
@@ -36,13 +33,7 @@ public class MainScreen : UIPanel
 
     private void Init()
     {
-        UpdateNoAdsButton();
-    }
 
-    public void ShowSetting()
-    {
-        AudioAssistant.Shot(TypeSound.Button);
-        PopupSetting.Show();
     }
 
     public void StartGame()
@@ -58,8 +49,6 @@ public class MainScreen : UIPanel
         PlayScreen.Show();
     }
 
-    void UpdateNoAdsButton() => btnNoAds.SetActive(!Gm.data.user.purchasedNoAds);
-
     public void OnBuyNoAds()
     {
         AudioAssistant.Shot(TypeSound.Button);
@@ -68,16 +57,12 @@ public class MainScreen : UIPanel
 
     protected override void RegisterEvent()
     {
-        Evm.OnPurchaseNoAds.AddListener(UpdateNoAdsButton);
-        
-        base.RegisterEvent();
+
     }
 
     protected override void UnregisterEvent()
     {
-        Evm.OnPurchaseNoAds.RemoveListener(UpdateNoAdsButton);
-        
-        base.UnregisterEvent();
+
     }
 
     public override void OnDisappear()
